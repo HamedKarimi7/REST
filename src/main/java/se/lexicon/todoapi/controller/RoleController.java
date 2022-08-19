@@ -23,6 +23,7 @@ public class RoleController {
 
     @GetMapping("/")
     public ResponseEntity<List<Role>> getAllRoles(){
+        System.out.println("### getAllRoles has been executed!");
       List<Role> roleList = roleRepository.findAll();
        // return ResponseEntity.status(HttpStatus.OK).body(roleList);
         return ResponseEntity.ok(roleList);
