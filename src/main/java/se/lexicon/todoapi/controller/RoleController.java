@@ -1,11 +1,9 @@
 package se.lexicon.todoapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.lexicon.todoapi.model.entity.Role;
 import se.lexicon.todoapi.repository.RoleRepository;
 
@@ -39,9 +37,22 @@ public class RoleController {
         Role role = roleRepository.findById(id).orElse(null);
         return ResponseEntity.ok(role);
 
-
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRoleById(@PathVariable("id") Integer id) {
+        System.out.println("id=" + id);
+        roleRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<Role> createRole(@RequestBody Role role){
+        System.out.println("role=" + role);
+        Role createRole = roleRepository.save(role);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createRole);
+
+    }
 
 
 }
