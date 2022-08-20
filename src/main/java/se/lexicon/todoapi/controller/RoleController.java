@@ -54,6 +54,14 @@ public class RoleController {
 
     }
 
+    @PutMapping("/")
+    public ResponseEntity<Void> updateRoleById(@RequestBody Role role){
+        System.out.println("role=" + role);
+        roleRepository.save(role);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+
 
 }
 
